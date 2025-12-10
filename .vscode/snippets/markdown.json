@@ -1,0 +1,107 @@
+{
+  "Month Goals (Second Brain)": {
+    "prefix": "month",
+    "description": "Шаблон месяца с YAML фронтматтером",
+    "body": [
+      "---",
+      "type: month",
+      "id: ${1:november-2025}",
+      "period: ${2:2025-11}",
+      "status: ${3:planning}",
+      "updated: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "links:",
+      "  year: ${4:2025}.md",
+      "  prev_month: ${5:october_2025}.md",
+      "  next_month: ${6:december_2025}.md",
+      "tags: [goals, month]",
+      "---",
+      "",
+      "# ${7:Название} — Месяц ${8:лейтмотив}",
+      "",
+      "## 🧠 DECISIONS",
+      "",
+      "## 📊 SUCCESS METRICS",
+      "### Must-have:",
+      "### Nice-to-have:"
+    ]
+  },
+  "Year Goals (Second Brain)": {
+    "prefix": "year",
+    "description": "Шаблон года с YAML фронтматтером",
+    "body": [
+      "---",
+      "type: year",
+      "id: y${1:2026}",
+      "year: ${1:2026}",
+      "status: in_progress",
+      "updated: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "tags: [strategy, goals]",
+      "---",
+      "",
+      "# 🎯 Цели ${1:2026}",
+      "",
+      "## Фокус года",
+      "",
+      "## ✅ Preflight — 4 опоры (базовая проверка)",
+      "*Быстрая оценка баланса и выбор 1 шага на слабую опору.*"
+    ]
+  },
+  "Podcast TLDR (Second Brain)": {
+    "prefix": "podcast",
+    "description": "YAML для заметки подкаста/видео",
+    "body": [
+      "---",
+      "type: podcast",
+      "topic: ${1:psychology}",
+      "title: \"${2:Title}\"",
+      "source: \"${3:https://...}\"",
+      "updated: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "tags: [tldr, ${4:topic}]",
+      "---",
+      "",
+      "## 🧠 ТЕЗИС",
+      "",
+      "## 🔑 КЛЮЧЕВЫЕ ИДЕИ"
+    ]
+  },
+  "Book (Second Brain)": {
+    "prefix": "book",
+    "description": "YAML для заметки по книге",
+    "body": [
+      "---",
+      "type: book",
+      "title: \"${1:Название}\"",
+      "author: \"${2:Автор}\"",
+      "year: ${3:20XX}",
+      "updated: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "tags: [book, ${4:тема}]",
+      "---"
+    ]
+  },
+  "Practice (Second Brain)": {
+    "prefix": "practice",
+    "description": "YAML для практики",
+    "body": [
+      "---",
+      "type: practice",
+      "id: ${1:reset-focus}",
+      "updated: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "tags: [practice, ${2:topic}]",
+      "---"
+    ]
+  },
+  "Research/Review (Second Brain)": {
+    "prefix": "research",
+    "description": "YAML для исследования/обзора",
+    "body": [
+      "---",
+      "type: research",
+      "title: \"${1:Название}\"",
+      "source: \"${2:https://doi.org/...}\"",
+      "updated: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "tags: [research, ${3:тема}]",
+      "---"
+    ]
+  }
+}
+

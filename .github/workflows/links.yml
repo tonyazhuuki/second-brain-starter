@@ -1,0 +1,45 @@
+name: Links Validation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  internal-links:
+    name: Internal links and backlinks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: YAML frontmatter guard
+        run: |
+          python3 tools/yaml_guard.py
+      - name: Run internal link linter
+        run: |
+          python3 tools/link_lint.py
+
+  external-links:
+    name: External URLs (lychee)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lychee link checker
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >
+            --no-progress
+            --accept 200,301,302,999
+            --include-mail
+            --exclude-all-private
+            --retry 2
+            --max-concurrency 8
+            --timeout 20
+            .
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

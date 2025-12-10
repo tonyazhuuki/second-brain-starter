@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.mdc": "markdown"
+  },
+  "markdown.updateLinksOnFileMove.enabled": "always",
+  "markdown.experimental.validate.enabled": true,
+  "markdown.validate.enabled": true,
+  "markdown.preview.doubleClickToSwitchToEditor": true,
+  "editor.wordWrap": "on"
+}
+
