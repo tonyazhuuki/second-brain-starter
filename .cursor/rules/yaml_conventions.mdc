@@ -9,7 +9,16 @@
    - `## 🧠 DECISIONS` — блок ключевых решений месяца
    - `## 📊 SUCCESS METRICS` — метрики результата
      - внутри: `### Must-have:` и `### Nice-to-have:`
+   - `## 🧭 По сферам жизни` — домены по PARA с единым форматом:
+     - В каждой сфере: ссылка на соответствующий **MOC** в `01_library/mocs/`
+     - Две подподсекции строго этим маркером:
+       - `Be — Состояние месяца` — качественное состояние/намерение в сфере
+       - `Do — Действия` — чек‑боксы `- [ ]` только для действий по сфере
 3) Для годов/диапазонов лет — `type: year` или `type: year_range` и базовые поля.
+4) Ссылки навигации обязательны для целей/планов (`00_vision/**`):
+   - Месяц: `links.year`, `links.prev_month`, `links.next_month`
+   - Год: `links.prev_year`, `links.next_year`
+   - В библиотеке (`01_library/**`) навигационные prev/next не требуются и НЕ добавляются.
 
 ## Минимальные шаблоны
 
@@ -36,6 +45,32 @@ tags: [goals, month]
 ## 📊 SUCCESS METRICS
 ### Must-have:
 ### Nice-to-have:
+
+## 🧭 По сферам жизни
+### ❤️ Отношения
+→ см. [MOC: Отношения](../../01_library/mocs/relationships.md)
+Be — Состояние месяца
+- ...
+Do — Действия
+- [ ] ...
+### 🏥 Здоровье
+→ см. [MOC: Здоровье](../../01_library/mocs/health.md)
+Be — Состояние месяца
+- ...
+Do — Действия
+- [ ] ...
+### 💼/🛠 Работа / Служение
+→ см. [MOC: Работа/Служение](../../01_library/mocs/work_service.md)
+Be — Состояние месяца
+- ...
+Do — Действия
+- [ ] ...
+### 📋 Документы / Финансы
+→ см. [MOC: Документы](../../01_library/mocs/documents_citizenship.md) · [MOC: Финансы](../../01_library/mocs/capital_finance.md)
+Be — Состояние месяца
+- ...
+Do — Действия
+- [ ] ...
 ```
 
 Год:
@@ -46,6 +81,9 @@ id: y{YYYY}
 year: {YYYY}
 status: in_progress
 updated: {YYYY-MM-DD}
+links:
+  prev_year: {YYYY-1}.md
+  next_year: {YYYY+1}.md
 tags: [strategy, goals]
 ---
 ```
@@ -65,6 +103,7 @@ tags: [strategy, goals]
 ## Примечания
 - Если YAML отсутствует в существующем файле, ассистент добавляет его минимальный вариант без изменения остального контента.
 - В уже оформленных файлах заголовки «решений/метрик» нормализуются к маркерам выше (контент не меняем).
+- Навигационные ссылки (prev/next) сохраняются и поддерживаются ТОЛЬКО для файлов `00_vision/**` (месяцы/годы). Для контента библиотеки (`01_library/**` — подкасты, книги, практики, исследования) такие ссылки не генерируются.
 
 ## Библиотека (`01_library/**`) — минимальные схемы
 
@@ -77,6 +116,9 @@ title: "Attia × Rhonda Patrick — Protein & Creatine"
 source: "https://youtu.be/xxxx"
 updated: {YYYY-MM-DD}
 tags: [tldr, protein, creatine]
+id: {stable-slug}        # рекомендация: человекочитаемый slug
+aliases: []              # синонимы/варианты названия
+areas: []                # опционально: связь с Areas (PARA)
 ---
 ```
 
@@ -89,6 +131,9 @@ author: "Автор"
 year: 20XX
 updated: {YYYY-MM-DD}
 tags: [book, тема]
+id: {stable-slug}
+aliases: []
+areas: []
 ---
 ```
 
@@ -99,6 +144,8 @@ type: practice
 id: reset-focus
 updated: {YYYY-MM-DD}
 tags: [practice, focus]
+aliases: []
+areas: []
 ---
 ```
 
@@ -110,6 +157,60 @@ title: "Название статьи/обзора"
 source: "https://doi.org/... | https://..."
 updated: {YYYY-MM-DD}
 tags: [research, тема]
+id: {stable-slug}
+aliases: []
+areas: []
+---
+```
+
+## Zettel‑конвенции (рекомендации)
+- Для «атомных» заметок добавляйте:
+  - `id:` стабильный идентификатор (slug или `zYYYYMMDDHHMM`)
+  - `aliases: []` — список синонимов
+- Это облегчает переименования и поиск, а также автоматическую перелинковку.
+
+## Журнал (daily journal) — схема
+Ежедневные заметки‑дневники для осознанности и связки с целями месяца/года.
+
+```yaml
+---
+type: journal
+date: {YYYY-MM-DD}
+id: z{YYYYMMDD}          # опционально
+updated: {YYYY-MM-DD}
+# ядро дня (желательно)
+mood: {1..5}
+energy: {1..5}
+focus: {1..5}
+stress: {1..5}
+# опциональные метрики (только если были)
+metrics:
+  deep_work_min: {int}   # минуты глубокой работы за день
+links:
+  month: ../../00_vision/goals/{YYYY}/{month_YYYY}.md
+  year: ../../00_vision/goals/{YYYY}.md
+tags: [journal]
+---
+```
+
+Тела заметки (рекомендованные секции):
+- `## 🙏 Gratitude (1–3)`
+- `## ✍️ Notes`
+- `## ✅ Done (highlights)`
+- `## 🧠 Decisions / Insights`
+- `## ⚠️ Frictions`
+- `## Next tiny step (1)`
+- `## Связанные файлы` — навигационные ссылки
+
+## Проекты (`06_projects/**`) — минимальная схема
+```yaml
+---
+type: project
+title: "Короткое название проекта"
+status: active           # active | on_hold | completed | archived
+updated: {YYYY-MM-DD}
+areas: [work_service]    # связь с Areas (PARA), несколько допускается
+tags: [project]
 ---
 ```
 
